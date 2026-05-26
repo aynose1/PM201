@@ -99,7 +99,17 @@ function menu_cajas () {
         
         let indice = prompt("Porfavor ingrese el ID del producto: ");
         let cantidad = prompt("Porfavor ingrese cantidad: ");
-        pedidos.agregar_pedido(indice, cantidad);
+
+        setTimeout(console.log(`Pedido Recibido`), 1000);
+
+        setTimeout(console.log(`Preparando...`), 1000);
+
+        setTimeout(console.log(`Empacando...`), 1000);
+
+        setTimeout(pedidos.agregar_pedido(indice, cantidad), 1000, indice, cantidad);
+
+        
+        
         console.log(`Pedido agregado...`);
         menu_cajas();
     } else if (entrada == 3) {
