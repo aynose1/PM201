@@ -1,5 +1,5 @@
-import { ListaProductos } from "./lista_productos.js";
-import { Pedido } from "./pedidos.js";
+import { ListaProductos } from "./practica_integrada_4/lista_productos.js";
+import { Pedido } from "./practica_integrada_4/pedidos.js";
 import promptSync from "prompt-sync";
 
 let lista_productos = new ListaProductos([
@@ -100,18 +100,25 @@ function menu_cajas () {
         let indice = prompt("Porfavor ingrese el ID del producto: ");
         let cantidad = prompt("Porfavor ingrese cantidad: ");
 
-        setTimeout(console.log(`Pedido Recibido`), 1000);
+        setTimeout(() => {
+            console.log(`Pedido Recibido`);
+        }, 1000);
 
-        setTimeout(console.log(`Preparando...`), 1000);
+        setTimeout(() => {
+            console.log(`Preparando...`);
+        }, 2000);
 
-        setTimeout(console.log(`Empacando...`), 1000);
+        setTimeout(() => {
+            console.log(`Empacando...`);
+        }, 3000);
 
-        setTimeout(pedidos.agregar_pedido(indice, cantidad), 1000, indice, cantidad);
-
+        setTimeout(() => {
+            pedidos.agregar_pedido(indice, cantidad);
+            console.log(`Pedido agregado...`);
+            menu_cajas();
+        }, 4000);
         
-        
-        console.log(`Pedido agregado...`);
-        menu_cajas();
+
     } else if (entrada == 3) {
         pedidos.ver_pedidos();
         let subtotal = pedidos.obtener_subtotal();

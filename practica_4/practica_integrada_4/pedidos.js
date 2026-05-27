@@ -6,7 +6,7 @@ export class Pedido {
 
     agregar_pedido (indice_producto, cantidad) {
         let producto = this.obj_lista_productos[indice_producto];
-        this.productos_pedidos.push({producto: producto.nombre, precio: producto.precio, cantidad: cantidad});
+        this.productos_pedidos.push({producto: producto.nombre, precio: producto.precio, cantidad: cantidad, estado: "En espera"});
     }
 
     ver_pedidos () {
@@ -28,6 +28,17 @@ export class Pedido {
     obtener_total () {
         let subtotal = this.obtener_subtotal();
         let total =  subtotal + (subtotal * 0.16);
+        return total;
+    }
+
+    validar_pedidos (recetas, inventario, indice) {
+        let receta = recetas.find(receta => receta.producto === this.productos_pedidos[indice].producto);
+        let ingredientes = receta.ingredientes;
+        let total;
+        ingredientes.forEach(item => {
+            let comp = inventario.find(inventario.ingrediente == item);
+            total = total * comp;
+        });
         return total;
     }
 }
