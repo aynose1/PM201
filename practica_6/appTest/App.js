@@ -3,7 +3,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Saludo } from './components/Saludo';
-import { Saludo_2 } from '.components/Saludo_2'
+import { Saludo_2 } from './components/Saludo_2';
+import { Perfil } from './components/Perfil';
 
 /* Zona 2: Main - Componentes del Screen */
 export default function App() {
@@ -19,6 +20,9 @@ export default function App() {
 
       <Text>------------------------------------</Text>
       <Saludo_2/>
+
+      <Text>------------------------------------</Text>
+      <Perfil/>
 
       {/* El estatus bar es la zona de la barra superior de la pantalla de los teléfonos */}
       <StatusBar style="auto" />
