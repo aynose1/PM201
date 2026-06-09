@@ -11,18 +11,9 @@ export default function App() {
   return (
 
     <View style={styles.container}>
-      {/* Puede ser de esta forma o una eyiqueta de autocierre <Image/> */}
-      <Image source={require('./assets/wave.png')}/>
 
-      <Text>Hola Mundo</Text>
-      <Text>------------------------------------</Text>
-      <Saludo/>
-
-      <Text>------------------------------------</Text>
-      <Saludo_2/>
-
-      <Text>------------------------------------</Text>
-      <Perfil/>
+      <Perfil nombre="Luis Alonso García Vázquez" carrera="Ingeniería en Sistemas Computacionales" materia="Programación Móvil" cuatrimestre="Noveno" />
+      <Perfil nombre="Diego" carrera="Ingeniería en Sistemas Computacionales" materia="Álgebra Lineal" cuatrimestre="Primero" />
 
       {/* El estatus bar es la zona de la barra superior de la pantalla de los teléfonos */}
       <StatusBar style="auto" />
