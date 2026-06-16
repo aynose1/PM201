@@ -33,8 +33,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     /* Tanto para alignItems y alignItems ambos dependen del valor de flexDirection */
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
+    flexDirection: 'row'
+    /* 
     flexDirection: 'column'
+    justifyContent: 'flex-start',
+    justifyContent: 'center',
+    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
+    */
   },
   tarjetaVerde: {
     backgroundColor: '#fd928e',
