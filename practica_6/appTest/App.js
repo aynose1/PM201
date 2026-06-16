@@ -12,8 +12,11 @@ export default function App() {
 
     <View style={styles.container}>
 
-      <Perfil nombre="Luis Alonso García Vázquez" carrera="Ingeniería en Sistemas Computacionales" materia="Programación Móvil" cuatrimestre="Noveno" />
-      <Perfil nombre="Diego" carrera="Ingeniería en Sistemas Computacionales" materia="Álgebra Lineal" cuatrimestre="Primero" />
+      <Perfil style={styles.tarjetaAzul} nombre="Luis Alonso García Vázquez" carrera="Ingeniería en Sistemas Computacionales" materia="Programación Móvil" cuatrimestre="Noveno" />
+
+      <Perfil style={styles.tarjetaVerde} nombre="Diego" carrera="Ingeniería en Sistemas Computacionales" materia="Álgebra Lineal" cuatrimestre="Primero" />
+
+      <Perfil style={styles.tarjetaVerde} nombre="Diego" carrera="Ingeniería en Sistemas Computacionales" materia="Álgebra Lineal" cuatrimestre="Primero" />
 
       {/* El estatus bar es la zona de la barra superior de la pantalla de los teléfonos */}
       <StatusBar style="auto" />
@@ -28,7 +31,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    /* Tanto para alignItems y alignItems ambos dependen del valor de flexDirection */
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'column'
   },
+  tarjetaVerde: {
+    backgroundColor: '#fd928e',
+
+  },
+  tarjetaAzul: {
+    backgroundColor: '#88fbf9',
+
+  }
 });
