@@ -1,7 +1,7 @@
 /* Perfil usando Desestructuración */
 import { View, Text, Button, StyleSheet } from 'react-native';
 import React,{useState} from 'react';
-import App from '../App';
+
 
 /* Se llama a cada parámetro dentro de los componentes para evitar usar la palabra props */
 /* Es importante que si se quiere usar un estilo desde App.js es importante agregar style como parámetro para permitir más props */
@@ -10,7 +10,7 @@ export const Perfil = ({nombre, carrera, materia, cuatrimestre, style}) => {
     return (
         /*   */
         <View style={[styles.tarjeta, style]}>
-            <Text style={styles.nombre}>{nombre}</Text>
+            <Text style={[styles.nombre, style]}>{nombre}</Text>
             {/* Renderización condicional */}
             { mostrar &&  
             /* Fragmentos, para cuando no se quiere usar tantos views, es un fragmento de código
@@ -21,9 +21,9 @@ export const Perfil = ({nombre, carrera, materia, cuatrimestre, style}) => {
             El fragmento es algo que no siempre se va a estar mostrando
             */
                 <>
-                    <Text style={styles.carrera}>{carrera}</Text>
-                    <Text style={styles.materia}>{materia}</Text>
-                    <Text style={styles.cuatrimestre}>{cuatrimestre}</Text>
+                    <Text style={[styles.carrera, style]}>{carrera}</Text>
+                    <Text style={[styles.materia, style]}>{materia}</Text>
+                    <Text style={[styles.cuatrimestre, style]}>{cuatrimestre}</Text>
                 </>
             }
             <Button title="Ver Perfil" onPress={ () => setMostrar(!mostrar) } />
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         /* Borde de tarjeta */
         borderWidth: 2,
         padding: 25,
-        
+        margin: 20
     },
 });
 
