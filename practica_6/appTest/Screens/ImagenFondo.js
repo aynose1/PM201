@@ -5,7 +5,7 @@ import {Perfil} from '../components/Perfil';
 import { StatusBar } from 'expo-status-bar';
 
 export const ImagenFondo = (style) => {
-    const [volver, setVolver] = useState(false);
+    
     return (
         <ImageBackground style={styles.container} source={require('../assets/bg_2.jpeg')}>
             <View>
@@ -13,10 +13,8 @@ export const ImagenFondo = (style) => {
             </View>
             
         </ImageBackground>
-        
     );
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,

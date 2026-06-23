@@ -17,7 +17,7 @@ export default function MenuScreen() {
         if (screen === 'splashScreen') {
             const timer = setTimeout(() => {
                 setScreen('home');
-            }, 3000);
+            }, 6000);
             return () => clearTimeout(timer);
         }
     }, [screen]);

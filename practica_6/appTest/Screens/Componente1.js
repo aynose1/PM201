@@ -1,35 +1,34 @@
-/* Zona 1: Improtaciones de archivos y componentes */
+import React, { useState } from 'react';
+import { SafeAreaView, ScrollView, View, Text, Button } from 'react-native';
 
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+export default function App() {
 
-/* Zona 2: Main - Componentes del Screen */
-export default function Componente1() {
+  const [tareas, setTareas] = useState([
+    'Ir al gimnasio',
+    'Asistir a clases',
+    'Pasar lista en el charlees',
+    'Ver a la novia',
+    'Dormir temprano'
+  ]);
+
+  const agregarTarea = () => {
+    setTareas([ ...tareas, `Nueva tarea ${tareas.length + 1}`]);
+  };
+
   return (
-    <View>
-        <Text>Aquí va la primer práctica de componentes nativos</Text>
-    </View>
+
+    <SafeAreaView style={{ flex: 1 }}>
+
+      <Button title="Agregar tarea" onPress={agregarTarea} />
+
+      <ScrollView contentContainerStyle={{ padding: 30}}>
+        {tareas.map((tarea, index) => (
+          <View key={index} style={{ marginBottom: 10, padding: 15, backgroundColor: '#ddd'}}>
+            <Text>{tarea}</Text>
+          </View>
+        ))}
+      </ScrollView>
+
+    </SafeAreaView>
   );
 }
-
-/* Zona 3: Estilos y posicionamiento */
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    /* Tanto para alignItems y alignItems ambos dependen del valor de flexDirection */
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    flexDirection: 'row'
-    /* 
-    flexDirection: 'column'
-    justifyContent: 'flex-start',
-    justifyContent: 'center',
-    justifyContent: 'flex-end',
-    justifyContent: 'space-between',
-    justifyContent: 'space-around',
-    justifyContent: 'space-evenly',
-    */
-  },
-
-});
