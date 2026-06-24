@@ -2,12 +2,14 @@
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
-import React,{useEffect, useState} from 'react';
+import React,{Component, useEffect, useState} from 'react';
 import TarjetasScreen from '../Screens/TarjetasScreen';
-import Componente1 from './Componente1';
+import PressableScreen from './PressableScreen';
 import {ImagenFondo} from './ImagenFondo';
 import { SplashScreen } from './SplashScreen';
+import {Componente1} from './Componente1';
 import { Home } from './Home';
+import SwitchScreen from './SwitchScreen';
 
 /* Zona 2: Main - Componentes del Screen */
 export default function MenuScreen() {
@@ -25,14 +27,18 @@ export default function MenuScreen() {
     switch (screen) {
         case 'tarjetas': 
             return <TarjetasScreen/>;
-        case 'componente1': 
+        case 'componente1':
             return <Componente1/>;
+        case 'pressableScreen': 
+            return <PressableScreen/>;
+        case 'switch':
+            return <SwitchScreen/>;
         case 'imagenFondo':
             return <ImagenFondo style={styles.container}/>;
         case 'home':
-            return <Home/>
+            return <Home/>;
         case 'splashScreen':
-            return <SplashScreen/>
+            return <SplashScreen/>;
         case 'menu':
             default:
                 return (
@@ -40,7 +46,11 @@ export default function MenuScreen() {
                         <Text>Menú de prácticas</Text>
                         <Button title='Práctica Tarjetas' onPress={ () => setScreen('tarjetas') }/>
 
-                        <Button title='Práctica 1' onPress={() => setScreen('componente1') }/>
+                        <Button title="Componente 1" onPress={() => setScreen('componente1')}/>
+
+                        <Button title='PressableScreen' onPress={() => setScreen('pressableScreen') }/>
+
+                        <Button title='Switch' onPress={() => setScreen('switch')}/>
 
                         <Button title='Imagen Bg' onPress={() => setScreen('imagenFondo')}/>
 
@@ -57,7 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     /* Tanto para alignItems y alignItems ambos dependen del valor de flexDirection */
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     flexDirection: 'column'
     /* 
     flexDirection: 'column'
