@@ -10,6 +10,8 @@ import { SplashScreen } from './SplashScreen';
 import {Componente1} from './Componente1';
 import { Home } from './Home';
 import SwitchScreen from './SwitchScreen';
+import { Componente4_0 } from './Componente4_0';
+import {Alerta} from './Alerta'
 
 /* Zona 2: Main - Componentes del Screen */
 export default function MenuScreen() {
@@ -33,6 +35,10 @@ export default function MenuScreen() {
             return <PressableScreen/>;
         case 'switch':
             return <SwitchScreen/>;
+        case 'input':
+            return <Componente4_0/>
+        case 'alert':
+            return <Alerta/>
         case 'imagenFondo':
             return <ImagenFondo style={styles.container}/>;
         case 'home':
@@ -51,6 +57,10 @@ export default function MenuScreen() {
                         <Button title='PressableScreen' onPress={() => setScreen('pressableScreen') }/>
 
                         <Button title='Switch' onPress={() => setScreen('switch')}/>
+
+                        <Button title='Input' onPress={() => setScreen('input')}/>
+
+                        <Button title='Alerta' onPress={() => setScreen('alert')}/>
 
                         <Button title='Imagen Bg' onPress={() => setScreen('imagenFondo')}/>
 
