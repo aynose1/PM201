@@ -14,6 +14,7 @@ import { Componente4_0 } from './Componente4_0';
 import {Alerta} from './Alerta'
 import { FlatListScreen } from './FlatListScreen';
 import { SectionListScreen } from './SectionListScreen';
+import { ComponentesNativos } from './ComponentesNativos';
 
 /* Zona 2: Main - Componentes del Screen */
 export default function MenuScreen() {
@@ -51,6 +52,8 @@ export default function MenuScreen() {
             return <Home/>;
         case 'splashScreen':
             return <SplashScreen/>;
+        case 'componenteNativo':
+            return <ComponentesNativos/>
         case 'menu':
             default:
                 return (
@@ -75,6 +78,8 @@ export default function MenuScreen() {
                         <Button title='Flat List' onPress={() => setScreen('flatList')}/>
 
                         <Button title='Section List' onPress={() => setScreen('sectionList')}/>
+                        
+                        <Button title='Componentes Nativos' onPress={() => setScreen('componenteNativo')}/>
                     </View>
                 );//Return
     }//Switch
