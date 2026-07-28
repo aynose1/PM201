@@ -1,9 +1,54 @@
 import React, { useState } from 'react';
-import {View,SafeAreaView,Text,TextInput,Pressable,StyleSheet,} from 'react-native';
+import {View,SafeAreaView,Text,TextInput,Pressable,StyleSheet,Alert,Platform} from 'react-native';
 
 export default function App() {
   const [nombre, setNombre] = useState('');
   const [edad, setEdad] = useState('');
+  //Estado para inhabilitar el botón
+  const [cargando, setCargando] = useState(false);
+
+  const mostrarMensaje = (titulo, mensaje) => {
+    if(Platform.OS == 'web') {
+      window.alert(`${titulo}\n\n${mensaje}`);
+    } else {
+      Alert.alert(titulo, mensaje);
+    }
+  }
+
+  const guardarUsuario = async () => {
+    //Quitar espacios a la izquierda y a la derecha
+    if (nombre.trim() === '' || edad.trim() === '') {
+      mostrarMensaje('Vacíos', 'Llena nombre y edad para continuar');
+      return;
+    }
+    try {
+      setCargando(true);
+      //Por defecto al llamar a la API se usa el método GET, pero para POST esto debe indicarse
+      const respuesta = await fetch('http://192.168.100.98:5000/v1/usuarios/',
+        {
+          method: 'POST',
+          //Se define qué tipo de información voy a enviar, en este caso un JSON
+          headers: {'Content-Type':'application/json'},
+          //En todos los envíos se envía un body, es el cuerpo del POST, es lo que tengo guardado en los state nombre y edad.
+          //Para enviarlo en formato JSON se utiliza el objeto JSON y su método stringify
+          body: JSON.stringify({nombre: nombre, edad: edad}),
+        }
+      );
+
+      const datos = await respuesta.json();
+      console.log(datos);
+      mostrarMensaje('Éxito', 'Usuario Registrado Exitosamente');
+      //Borrar el contenido de los Input después de la alerta
+      setNombre('');
+      setEdad('');
+    } catch (error) {
+      mostrarMensaje('Error', 'No fué posible guardar usuario');
+      console.log(`Error: ${error}`);
+    } finally {
+      //Esto se ejecuta sin importar si entra en try o catch, es algo que siempre se tiene que hacer
+      setCargando(false);
+    }
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,9 +74,14 @@ export default function App() {
           onChangeText={setEdad}
         />
 
-        <Pressable style={styles.boton}>
+        <Pressable
+          style={styles.boton}
+          onPress={guardarUsuario}
+          disabled={cargando}
+        >
           <Text style={styles.textoBoton}>
-            Agregar Usuario
+            {/* Se usa un estilo condicional */}
+            {cargando ? 'Guardando...': 'Agregar Usuario'}
           </Text>
         </Pressable>
 
