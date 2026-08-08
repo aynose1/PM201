@@ -24,7 +24,7 @@ export default function App() {
     try {
       setCargando(true);
       //Por defecto al llamar a la API se usa el método GET, pero para POST esto debe indicarse
-      const respuesta = await fetch('http://192.168.100.98:5000/v1/usuarios/',
+      const respuesta = await fetch('http://192.168.137.1:5000/v1/usuarios/',
         {
           method: 'POST',
           //Se define qué tipo de información voy a enviar, en este caso un JSON

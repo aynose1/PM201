@@ -1,25 +1,24 @@
-import {SafeAreaView,View,Text,FlatList,StyleSheet,} from 'react-native';
+import {SafeAreaView, View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
+import DetallesUsuarioScreen from './DetallesUsuarioScreen';
+import { useRouter } from 'expo-router';
+
 
 export default function ConsultaUsuariosScreen() {
 
+  const router = useRouter();
   const [usuarios, setUsuarios] = useState([]);
+  //Guarda el usuario de la tarjeta que se tocó, null significa "seguimos en la lista"
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
 
-  const obtenerUsuarios = async()=>{
+  const obtenerUsuarios = async () => {
     try {
-      //Recibe los datos del API
-      const respuesta = await fetch('http://192.168.100.98:5000/v1/usuarios/');
-      //Convierte los datos a formato JSON
+      const respuesta = await fetch('http://192.168.137.1:5000/v1/usuarios/');
       const datos = await respuesta.json();
-      //Muestra por consola los datos obtenidos
       console.log('Respuesta API', datos);
-      
-      //Se almacena en usuarios los datos en el índice "usuarios" de los datos obtenidos del API
       setUsuarios(datos.usuarios);
-
     } catch (error) {
-      //Devuelve error de cualquier obstáculo que suceda durante la consulta a la API
-      console.log("Error:", error);
+      console.log('Error:', error);
     }
   };
 
@@ -27,7 +26,7 @@ export default function ConsultaUsuariosScreen() {
     obtenerUsuarios();
   }, []);
 
-  const renderTarjeta = ({ item }) => (
+  const renderTarjeta = ({item}) => (
     <View style={styles.card}>
 
       <Text style={styles.nombre}>{item.nombre}</Text>
@@ -38,11 +37,30 @@ export default function ConsultaUsuariosScreen() {
         Edad: {item.edad} años
       </Text>
 
+      <Pressable
+        //pathname es la ruta y params son los datos que viajan a la otra pantalla
+        onPress={() => router.push({
+          pathname: '/detalles',
+          params: {id: item.id, nombre: item.nombre, edad: item.edad},
+        })}
+      >
+        <Text style={styles.verDetalles}>Ver detalles →</Text>
+      </Pressable>
+
     </View>
   );
 
-  return (
+  if (usuarioSeleccionado) {
+    return (
+      <DetallesUsuarioScreen
+        item={usuarioSeleccionado}
+        //Al regresar se limpia el estado y vuelve a aparecer la lista
+        onRegresar={() => setUsuarioSeleccionado(null)}
+      />
+    );
+  }
 
+  return (
     <SafeAreaView style={styles.container}>
 
       <Text style={styles.titulo}>
@@ -51,15 +69,14 @@ export default function ConsultaUsuariosScreen() {
 
       <FlatList
         data={usuarios}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => String(item.id)}
         renderItem={renderTarjeta}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 20 }}
+        contentContainerStyle={{paddingBottom: 20}}
       />
 
     </SafeAreaView>
   );
-  
 }
 
 const styles = StyleSheet.create({
@@ -84,7 +101,6 @@ const styles = StyleSheet.create({
     padding: 18,
     marginBottom: 15,
     elevation: 4,
-
     shadowColor: '#000',
     shadowOpacity: 0.15,
     shadowRadius: 5,
@@ -109,6 +125,14 @@ const styles = StyleSheet.create({
   info: {
     fontSize: 16,
     color: '#4B5563',
+  },
+
+  verDetalles: {
+    alignSelf: 'flex-end',
+    marginTop: 12,
+    color: '#2563EB',
+    fontSize: 13,
+    fontWeight: '600',
   },
 
 });
